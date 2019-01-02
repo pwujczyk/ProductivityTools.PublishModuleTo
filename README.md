@@ -8,10 +8,16 @@
 
 Publishing module to Powershell gallery is very straight-forward task. To do it we just need to invoke command
 
+```powershell
 Publish-Module -NuGetApiKey $nuGetApiKey -Name $fullPath
+```
+
 If we are pushing to different repository than default. We also can provide PSRepository  parameter.
 
+```powershell
 Publish-Module -PSRepository $psRepository -NuGetApiKey $nuGetApiKey -Name $fullPath
+```
+
 When publishing module we are always providing the same pair of information, so described module help to automate it a little bit.
 
 First of all Publish-ModuleTo gets nugetApiKey from MasterConfiguration, so we don't need to provide it every time we pushing module.
