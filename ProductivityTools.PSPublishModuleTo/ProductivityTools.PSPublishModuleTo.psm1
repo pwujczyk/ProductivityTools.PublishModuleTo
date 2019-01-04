@@ -1,4 +1,4 @@
-function  Publish-ModuleTo{
+function Publish-ModuleTo{
 	[CmdletBinding()]
 	param($PSRepository, $PSRepositoryApiKey)
 	
@@ -23,3 +23,5 @@ function  Publish-ModuleTo{
 		Publish-Module -Repository $PSRepository -NuGetApiKey $pSRepositoryApiValue -Name $fullPath
 	}
 }
+
+Export-ModuleMember Publish-ModuleTo
