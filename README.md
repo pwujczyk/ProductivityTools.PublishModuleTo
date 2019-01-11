@@ -27,7 +27,7 @@ First of all Publish-ModuleTo gets nugetApiKey from MasterConfiguration, so we 
 
 Additionally we don't need to point to the exact psd1 path to publish module, as Publish-ModuleTo search recursively for psd1 file and push it.
 
-This module is base for other, more specific ones. Please check out Publish-ModuleToPowershellGallery
+This module is base for other, more specific ones. Please check out [Publish-ModuleToPowershellGallery](https://github.com/pwujczyk/ProductivityTools.PublishModuleToPowershellGallery)
 
 ## Examples 
 To use it first You need to save NugetApiKey in the MasterConfiguration
