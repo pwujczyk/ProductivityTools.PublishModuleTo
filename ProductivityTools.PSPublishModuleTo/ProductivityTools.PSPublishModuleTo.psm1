@@ -20,7 +20,7 @@ function Publish-ModuleTo{
 		Write-Verbose "PSRepository: $PSRepository"
 		Write-Verbose "PSRepositoryApiKey: $PSRepositoryApiKey"
 		Write-Verbose "PSRepositoryApiValue: $pSRepositoryApiValue"
-		Publish-Module -Repository $PSRepository -NuGetApiKey $pSRepositoryApiValue -Name $fullPath
+		Publish-Module -Repository $PSRepository -NuGetApiKey $pSRepositoryApiValue -Name $fullPath  -Verbose:$VerbosePreference
 	}
 }
 
