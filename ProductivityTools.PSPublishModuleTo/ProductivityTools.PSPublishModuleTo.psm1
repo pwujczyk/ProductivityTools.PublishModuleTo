@@ -1,6 +1,5 @@
 function Publish-ModuleTo{
-	[CmdletBinding()]
-	param($PSRepository, $PSRepositoryApiKey)
+ 
 	
 	$pSRepositoryApiValue=Get-MasterConfiguration -Key $PSRepositoryApiKey
 
