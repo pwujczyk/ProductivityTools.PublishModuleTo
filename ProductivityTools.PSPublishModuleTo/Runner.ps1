@@ -1,7 +1,7 @@
 clear
 Import-Module D:\GitHub\ProductivityTools.PSPublishModuleTo\ProductivityTools.PSPublishModuleTo\ProductivityTools.PSPublishModuleTo.psm1 -Force
 cd D:\GitHub\ProductivityTools.PSPublishModuleTo\
-Set-MasterConfigurationBaseConfigurationFile -BaseConfigurationFileName D:\Tech\PSMasterConfiguration.xml
+cd "D:\GitHub-3.PublishedToLinkedIn\ProductivityTools.PSMasterConfiguration\ProductivityTools.PSMasterConfiguration.Cmdlet\bin\Debug"
 
 #Set-MasterConfiguration -Key PSGalleryApiKey -Value "xxx"
-Publish-ModuleTo -PSRepository PSGallery -PSRepositoryApiKey PSRepositoryApiKey -Verbose
+Publish-ModuleTo -PSRepositoryName PSGallery -PSRepositoryApiConfigKey PSRepositoryApiKey -Verbose -UpdateModuleVersion
