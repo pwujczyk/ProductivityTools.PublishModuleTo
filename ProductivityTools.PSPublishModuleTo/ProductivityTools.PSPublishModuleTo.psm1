@@ -9,8 +9,36 @@ function UpdateModuleVersion{
 	Write-Verbose "Old Version - $Version"
 	[version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, ($Version.Build + 1)
 	Write-Verbose "New Version - $NewVersion"
-	$psd1 -replace $version, $NewVersion | Out-File $psd1Path
+	$psd1 -replace $version, $NewVersion | Out-File $psd1Path -Force
 
+}
+
+function GetTypeOfModule{
+     [Cmdletbinding()]
+	param(
+		[string]$psd1FullName
+	)
+	$psd1= Get-Content $psd1FullName -Raw
+	$rootModule = [regex]::matches($psd1, "\s*RootModule\s=\s'(.*)'\s*")
+	$rootModuleName=$rootModule.groups[1].value
+	if($rootModuleName.EndsWith('.dll'))
+	{
+		return "binary"
+	}
+	
+	if($rootModuleName.EndsWith('.psm1'))
+	{
+		return "text"
+	}
+	
+	throw "In the Root module no dll nor psm1 type is defined"	
+}
+
+function Buildapplication{
+	[Cmdletbinding()]
+	param()
+	dotnet pack
+	
 }
 
 function Publish-ModuleTo{
@@ -22,6 +50,8 @@ function Publish-ModuleTo{
 		[switch]$UpdateModuleVersion 
 	)
 	
+	
+	
 	$PSRepositoryApiKey=Get-MasterConfiguration -Key $PSRepositoryApiConfigKey
 
 	$psd1s=@(Get-ChildItem -Recurse "*.psd1") 
@@ -30,13 +60,24 @@ function Publish-ModuleTo{
 
 	foreach($psd1 in $psd1s)
 	{
-		$fullPath=$psd1.FullName
+		$psd1FullName=$psd1.FullName
+		if ($psd1FullName.Contains("bin")) {continue}
 
+		$moduleType=GetTypeOfModule $psd1FullName
 		if($UpdateModuleVersion.IsPresent)
 		{
 			Write-Verbose "Update Module Version"
-			UpdateModuleVersion $fullPath
+			UpdateModuleVersion $psd1FullName
 		}
+		
+		switch ($moduleType)
+		{
+		    binary {Buildapplication}
+		    text {"It is two."}
+		}	
+		
+		$psd1s2=@(Get-ChildItem -Recurse "*.psd1") 
+		$BINARY=$psd1s2 |where {$_.DirectoryName -like "*bin*" -and $_.Name -eq $psd1.Name}
 
 		Write-Verbose "Publish $fullPath"
 		Write-Verbose "PSRepository: $PSRepositoryName"
