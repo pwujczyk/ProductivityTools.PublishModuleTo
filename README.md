@@ -1,15 +1,19 @@
-<p align="right">
- <a href="https://www.powershellgallery.com/packages/ProductivityTools.PSPublishModuleTo/">
-  <img src="http://cdn.productivitytools.tech/Powershell40px.png" /></a>
-<a href="http://www.productivitytools.tech/publish-moduleto//">
-<img src="http://cdn.productivitytools.tech/Blog40px.png" /></a>
+<!--Category:Powershell--> 
+ <p align="right">
+    <a href="https://www.powershellgallery.com/packages/ProductivityTools.PSGetDateName/"><img src="Images/Header/Powershell_border_40px.png" /></a>
+    <a href="http://productivitytools.tech/get-datename/"><img src="Images/Header/ProductivityTools_green_40px_2.png" /><a> 
+    <a href="https://github.com/pwujczyk/ProductivityTools.PSGetDateName"><img src="Images/Header/Github_border_40px.png" /></a>
 </p>
-
+<p align="center">
+    <a href="http://productivitytools.tech/">
+        <img src="Images/Header/LogoTitle_green_500px.png" />
+    </a>
+</p>
 
 # ProductivityTools.PSPublishModuleTo
 
 
-Publishing module to Powershell gallery is very straight-forward task. To do it we just need to invoke command
+Publishing module to PowerShell gallery is very straight-forward task. To do it we just need to invoke command
 
 ```powershell
 Publish-Module -NuGetApiKey $nuGetApiKey -Name $fullPath
@@ -21,21 +25,23 @@ If we are pushing to different repository than default. We also can provide PSR
 Publish-Module -PSRepository $psRepository -NuGetApiKey $nuGetApiKey -Name $fullPath
 ```
 
-When publishing module we are always providing the same pair of information, so described module help to automate it a little bit.
+As I am publishing a lot I am trying to automate this repeatable task. This module allows to be invoked in the directory of the module without pointing out exact psd1 file. Cmdlet will find it and process.
 
-First of all Publish-ModuleTo gets nugetApiKey from MasterConfiguration, so we don't need to provide it every time we pushing module.
+If module is binary one it will rebuild application and publish the newest version.
 
-Additionally we don't need to point to the exact psd1 path to publish module, as Publish-ModuleTo search recursively for psd1 file and push it.
+Also it allows to use **UpdateModuleVersion** switch, which will increase patch number (z in  X.Y.Z).
 
 This module is base for other, more specific ones. Please check out [Publish-ModuleToPowershellGallery](https://github.com/pwujczyk/ProductivityTools.PublishModuleToPowershellGallery)
 
 ## Examples 
-To use it first You need to save NugetApiKey in the MasterConfiguration
-```powershell
-Set-MasterConfiguration -Key PSGalleryApiKey -Value "xxx"
-```
 
-Next go to the directory of the module (or parent directory) and invoke
+Go to the directory of the module and invoke
 ```powershell
 Publish-ModuleTo -PSRepository PSGallery -PSRepositoryApiKey PSGalleryApiKey -Verbose
 ```
+
+## Switches
+- IncreaseModuleVersion - it will increase patch number in the target module
+
+## Diagram
+![](Images/Diagram.png)
