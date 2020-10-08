@@ -70,20 +70,27 @@ function Publish-ModuleTo{
 			UpdateModuleVersion $psd1FullName
 		}
 		
-		switch ($moduleType)
+		$psd1ToBePublished;
+		if ($moduleType -eq "binary")
 		{
-		    binary {Buildapplication}
-		    text {"It is two."}
-		}	
+			Buildapplication
+			$psd1sForBin=@(Get-ChildItem -Recurse "*.psd1") 
+			$binPsd1=$psd1sForBin |where {$_.DirectoryName -like "*bin*" -and $_.Name -eq $psd1.Name}
+			$psd1ToBePublished=$binPsd1
+		}
 		
-		$psd1s2=@(Get-ChildItem -Recurse "*.psd1") 
-		$BINARY=$psd1s2 |where {$_.DirectoryName -like "*bin*" -and $_.Name -eq $psd1.Name}
+		if ($moduleType -eq "text")
+		{
+			$psd1ToBePublished=$psd1FullName
+		}
+		
+		
 
 		Write-Verbose "Publish $fullPath"
 		Write-Verbose "PSRepository: $PSRepositoryName"
 		Write-Verbose "PSRepositoryApiKey: $PSRepositoryApiConfigKey"
 		Write-Verbose "PSRepositoryApiValue: $PSRepositoryApiKey"
-		Publish-Module -Repository $PSRepositoryName -NuGetApiKey $PSRepositoryApiKey -Name $fullPath  -Verbose:$VerbosePreference
+		Publish-Module -Repository $PSRepositoryName -NuGetApiKey $PSRepositoryApiKey -Name $psd1ToBePublished  -Verbose:$VerbosePreference
 	}
 }
 
