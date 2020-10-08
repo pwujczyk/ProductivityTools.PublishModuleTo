@@ -1,4 +1,4 @@
-function UpdateModuleVersion{
+xfunction UpdateModuleVersion{
 	[Cmdletbinding()]
 	param(
 		[string]$psd1Path
@@ -47,7 +47,7 @@ function Publish-ModuleTo{
 	param(
 		[string]$PSRepositoryName, #PSGallery, PawelGallery
 		[string]$PSRepositoryApiConfigKey, #Key stored in MasterConfiguration
-		[switch]$UpdateModuleVersion 
+		[switch]$IncreaseModuleVersion 
 	)
 	
 	
@@ -64,7 +64,7 @@ function Publish-ModuleTo{
 		if ($psd1FullName.Contains("bin")) {continue}
 
 		$moduleType=GetTypeOfModule $psd1FullName
-		if($UpdateModuleVersion.IsPresent)
+		if($IncreaseModuleVersion.IsPresent)
 		{
 			Write-Verbose "Update Module Version"
 			UpdateModuleVersion $psd1FullName

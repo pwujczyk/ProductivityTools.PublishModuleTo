@@ -2,7 +2,7 @@
  <a href="https://www.powershellgallery.com/packages/ProductivityTools.PSPublishModuleTo/">
   <img src="http://cdn.productivitytools.tech/Powershell40px.png" /></a>
 <a href="http://www.productivitytools.tech/publish-moduleto//">
-<img src="http://cdn.productivitytools.tech/Blog40px.png" /><a>
+<img src="http://cdn.productivitytools.tech/Blog40px.png" /></a>
 </p>
 
 

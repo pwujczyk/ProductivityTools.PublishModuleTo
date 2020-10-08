@@ -1,0 +1,21 @@
+@startuml
+start
+ :Find all psd1;
+ repeat
+ if (placed in bin directory) then (yes)
+ :continue;
+ else(no)
+ :process;
+    if(binary?) then(yes)
+    :build;
+    else(no)
+    endif;
+        if(IncreaseModuleVersion) then(yes)
+        :Increase Module Version;
+        else(no)
+        endif;
+    :publish;
+ endif;
+ repeat while (all psd1 files processed)
+stop
+@enduml
