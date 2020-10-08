@@ -1,4 +1,4 @@
-xfunction UpdateModuleVersion{
+function UpdateModuleVersion{
 	[Cmdletbinding()]
 	param(
 		[string]$psd1Path
@@ -10,7 +10,6 @@ xfunction UpdateModuleVersion{
 	[version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, ($Version.Build + 1)
 	Write-Verbose "New Version - $NewVersion"
 	$psd1 -replace $version, $NewVersion | Out-File $psd1Path -Force
-
 }
 
 function GetTypeOfModule{
@@ -38,7 +37,6 @@ function Buildapplication{
 	[Cmdletbinding()]
 	param()
 	dotnet pack
-	
 }
 
 function Publish-ModuleTo{
@@ -49,8 +47,6 @@ function Publish-ModuleTo{
 		[string]$PSRepositoryApiConfigKey, #Key stored in MasterConfiguration
 		[switch]$IncreaseModuleVersion 
 	)
-	
-	
 	
 	$PSRepositoryApiKey=Get-MasterConfiguration -Key $PSRepositoryApiConfigKey
 
