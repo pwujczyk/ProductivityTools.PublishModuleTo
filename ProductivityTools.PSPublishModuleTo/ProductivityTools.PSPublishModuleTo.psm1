@@ -43,12 +43,10 @@ function Publish-ModuleTo{
  
 	[Cmdletbinding()]
 	param(
-		[string]$PSRepositoryName, #PSGallery, PawelGallery
-		[string]$PSRepositoryApiConfigKey, #Key stored in MasterConfiguration
+		[string]$PSRepositoryName="PSGallery", #PSGallery, PawelGallery
+		[string]$NuGetApiKey,
 		[switch]$IncreaseModuleVersion 
-	)
-	
-	$PSRepositoryApiKey=Get-MasterConfiguration -Key $PSRepositoryApiConfigKey
+	)	
 
 	$psd1s=@(Get-ChildItem -Recurse "*.psd1") 
 
@@ -79,14 +77,11 @@ function Publish-ModuleTo{
 		{
 			$psd1ToBePublished=$psd1FullName
 		}
-		
-		
 
 		Write-Verbose "Publish $fullPath"
 		Write-Verbose "PSRepository: $PSRepositoryName"
-		Write-Verbose "PSRepositoryApiKey: $PSRepositoryApiConfigKey"
-		Write-Verbose "PSRepositoryApiValue: $PSRepositoryApiKey"
-		Publish-Module -Repository $PSRepositoryName -NuGetApiKey $PSRepositoryApiKey -Name $psd1ToBePublished  -Verbose:$VerbosePreference
+		Write-Verbose "NuGetApiKey: $NuGetApiKey"
+		Publish-Module -Repository $PSRepositoryName -NuGetApiKey $NuGetApiKey -Name $psd1ToBePublished  -Verbose:$VerbosePreference
 	}
 }
 
