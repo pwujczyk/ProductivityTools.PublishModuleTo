@@ -37,13 +37,15 @@ This module is base for other, more specific one. Please check out [Publish-Modu
 
 Go to the directory of the module and invoke
 ```powershell
-Publish-ModuleTo -PSRepository PSGallery -PSRepositoryApiKey PSGalleryApiKey -Verbose
+Publish-ModuleTo -PSRepository PSGallery -NuGetApiKey $nuGetApiKey 
 
-Publish-ModuleTo -PSRepository PSGallery -PSRepositoryApiKey PSGalleryApiKey -Verbose -IncreaseModuleVersion
+Publish-ModuleTo -PSRepository PSGallery --NuGetApiKey $nuGetApiKey  -Verbose -IncreaseModuleVersion
 ```
 
 ## Switches
 - IncreaseModuleVersion - it will increase patch number in the target module
+- PSRepository - name of the repository where to put module. You could get all your repositories with **Get-PSRepository** cmdlet. By default here is inserted PSGallery so you can omit it if you have default configuration
+- NuGetApiKey - your key which should be taken from profile on www.powershellgallery.com site
 
 ## Diagram
 ![](Images/Diagram.png)
