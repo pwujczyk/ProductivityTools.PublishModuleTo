@@ -8,4 +8,4 @@ $NuGetApiKey=Get-MasterConfiguration -Key PSRepositoryApiKey
 #cd "d:\GitHub-3.PublishedToLinkedIn\ProductivityTools.PSMasterConfiguration\ProductivityTools.PSMasterConfiguration.Cmdlet\"
 #Set-MasterConfiguration -Key PSGalleryApiKey -Value "xxx"
 #Publish-ModuleTo -PSRepositoryName PSGallery -NuGetApiKey PSRepositoryApiKey -Verbose  -IncreaseModuleVersion
-Publish-ModuleTo -NuGetApiKey PSRepositoryApiKey -Verbose  -IncreaseModuleVersion
+Publish-ModuleTo -NuGetApiKey $NuGetApiKey -Verbose -IncreaseModuleVersion 

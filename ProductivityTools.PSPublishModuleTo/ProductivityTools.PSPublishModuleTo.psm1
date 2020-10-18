@@ -4,7 +4,7 @@ function UpdateModuleVersion{
 		[string]$psd1Path
 	)
 	
-	$psd1= Get-Content $psd1Path
+	$psd1=Get-Content $psd1Path
 	[version]$Version = [regex]::matches($psd1, "\s*ModuleVersion\s=\s'(\d*.\d*.\d*)'\s*").groups[1].value
 	Write-Verbose "Old Version - $Version"
 	[version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, ($Version.Build + 1)
@@ -40,7 +40,6 @@ function Buildapplication{
 }
 
 function Publish-ModuleTo{
- 
 	[Cmdletbinding()]
 	param(
 		[string]$PSRepositoryName="PSGallery", #PSGallery, PawelGallery
