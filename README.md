@@ -10,8 +10,10 @@
     </a>
 </p>
 
-# Publish-ModuleTo
+# Publish module to
 
+Module helps to publish module to PowerShell gallery for binary and script modules.
+<!--more-->
 
 Publishing module to PowerShell gallery is very straight-forward task. To do it we just need to invoke command
 
@@ -19,12 +21,11 @@ Publishing module to PowerShell gallery is very straight-forward task. To do it 
 Publish-Module -NuGetApiKey $nuGetApiKey -Name $fullPath
 ```
 
-If we are pushing to different repository than default, we also can provide **PSRepository** parameter.
+If we are pushing to different repository than default, we also can provide **PSRepostiory** parameter
 
 ```powershell
 Publish-Module -PSRepository $psRepository -NuGetApiKey $nuGetApiKey -Name $fullPath
 ```
-
 As I am publishing a lot I automated this repeatable task. Described module allows to be invoked in the directory of the module without pointing out exact psd1 file. Cmdlet will find it and process.
 
 If a target module is binary one it will rebuild application and publish the newest version.
@@ -39,7 +40,7 @@ Go to the directory of the module and invoke
 ```powershell
 Publish-ModuleTo -PSRepository PSGallery -NuGetApiKey $nuGetApiKey 
 
-Publish-ModuleTo -PSRepository PSGallery --NuGetApiKey $nuGetApiKey  -Verbose -IncreaseModuleVersion
+Publish-ModuleTo -PSRepository PSGallery -NuGetApiKey $nuGetApiKey  -Verbose -IncreaseModuleVersion
 ```
 
 ## Switches
@@ -48,4 +49,5 @@ Publish-ModuleTo -PSRepository PSGallery --NuGetApiKey $nuGetApiKey  -Verbose -I
 - NuGetApiKey - your key which should be taken from profile on www.powershellgallery.com site
 
 ## Diagram
-![](Images/Diagram.png)
+<!--og-image-->
+![Diagram](Images/Diagram.png)
