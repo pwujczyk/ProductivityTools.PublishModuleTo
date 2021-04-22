@@ -6,7 +6,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>MyApplication</RootNamespace>
     <AssemblyName>MyApplication</AssemblyName>
-    <Name>ProductivityTools.PSPublishModuleTo</Name>
+    <Name>ProductivityTools.PublishModuleTo</Name>
+    <ProjectHome />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,8 +28,8 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="ProductivityTools.PSPublishModuleTo.psd1" />
-    <Compile Include="ProductivityTools.PSPublishModuleTo.psm1" />
+    <Compile Include="ProductivityTools.PublishModuleTo.psd1" />
+    <Compile Include="ProductivityTools.PublishModuleTo.psm1" />
     <Compile Include="Runner.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
