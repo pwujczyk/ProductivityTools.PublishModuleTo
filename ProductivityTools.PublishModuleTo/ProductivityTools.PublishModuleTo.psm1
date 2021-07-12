@@ -54,7 +54,11 @@ function Publish-ModuleTo{
 	foreach($psd1 in $psd1s)
 	{
 		$psd1FullName=$psd1.FullName
-		if ($psd1FullName.Contains("bin")) {continue}
+		Write-Verbose "File analyzed $($psd1FullName)"
+		if ($psd1FullName.Contains("bin")) {
+			Write-Verbose "File in the bin directory, we are interested in the publish, so ommiting this";
+			continue
+		}
 
 		$moduleType=GetTypeOfModule $psd1FullName
 		if($IncreaseModuleVersion.IsPresent)
@@ -63,21 +67,27 @@ function Publish-ModuleTo{
 			UpdateModuleVersion $psd1FullName
 		}
 		
-		$psd1ToBePublished;
+		
 		if ($moduleType -eq "binary")
 		{
+			Write-Verbose "Binary module, so building the app"
 			Buildapplication
 			$psd1sForBin=@(Get-ChildItem -Recurse "*.psd1") 
 			$binPsd1=$psd1sForBin |where {$_.DirectoryName -like "*bin*" -and $_.Name -eq $psd1.Name}
 			$psd1ToBePublished=$binPsd1
+			Write-Verbose "Binary module to be published (psd1ToBePublished) $($psd1ToBePublished)"
 		}
 		
 		if ($moduleType -eq "text")
 		{
 			$psd1ToBePublished=$psd1FullName
+			Write-Verbose "psm1 module to be published $($psd1ToBePublished)"
 		}
 
-		Write-Verbose "Publish $fullPath"
+		Write-Verbose "Checkint the type of the psd1ToBePublished"
+		$psd1ToBePublished.GetType();
+
+		Write-Verbose "Publish $psd1ToBePublished"
 		Write-Verbose "PSRepository: $PSRepositoryName"
 		Write-Verbose "NuGetApiKey: $NuGetApiKey"
 		Publish-Module -Repository $PSRepositoryName -NuGetApiKey $NuGetApiKey -Name $psd1ToBePublished  -Verbose:$VerbosePreference
